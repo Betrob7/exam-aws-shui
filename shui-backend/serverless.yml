@@ -1,0 +1,87 @@
+org: betrob7
+
+service: shui-backend
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: eu-north-1
+  httpApi:
+    cors: true
+  iam:
+    role: arn:aws:iam::865773021318:role/customLambdaRole
+
+functions:
+  RegisterUser:
+    handler: functions/auth/registerUser.handler
+    events:
+      - httpApi:
+          path: /api/auth/register
+          method: POST
+  LoginUser:
+    handler: functions/auth/loginUser.handler
+    events:
+      - httpApi:
+          path: /api/auth/login
+          method: POST
+  GetMessages:
+    handler: functions/messages/getMessages.handler
+    events:
+      - httpApi:
+          path: /api/messages
+          method: GET
+  PostMessage:
+    handler: functions/messages/postMessage.handler
+    events:
+      - httpApi:
+          path: /api/messages
+          method: POST
+  GetMessageById:
+    handler: functions/messages/getMessageById.handler
+    events:
+      - httpApi:
+          path: /api/messages/{id}
+          method: GET
+  DeleteMessage:
+    handler: functions/messages/deleteMessages.handler
+    events:
+      - httpApi:
+          path: /api/messages/{id}
+          method: DELETE
+  PatchMessage:
+    handler: functions/messages/patchMessages.handler
+    events:
+      - httpApi:
+          path: /api/messages/{id}
+          method: PATCH
+
+resources:
+  Resources:
+    BonzaiTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: shui-table
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: PK
+            AttributeType: S
+          - AttributeName: SK
+            AttributeType: S
+          - AttributeName: GSI1PK
+            AttributeType: S
+          - AttributeName: GSI1SK
+            AttributeType: S
+        KeySchema:
+          - AttributeName: PK
+            KeyType: HASH
+          - AttributeName: SK
+            KeyType: RANGE
+        GlobalSecondaryIndexes:
+          - IndexName: GSI1
+            KeySchema:
+              - AttributeName: GSI1PK
+                KeyType: HASH
+              - AttributeName: GSI1SK
+                KeyType: RANGE
+            Projection:
+              ProjectionType: ALL
