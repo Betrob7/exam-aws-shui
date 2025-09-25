@@ -1,0 +1,18 @@
+.flow-container {
+  padding: 1rem;
+  background: #162447; /* mörkblå */
+  min-height: 100vh;
+  color: white;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+.message-card {
+  background: white;
+  color: black;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+}
