@@ -5,6 +5,7 @@ import RegisterPage from "../pages/RegisterPage/RegisterPage.jsx";
 import RemovedPage from "../pages/RemovedPage/RemovedPage.jsx";
 import WriteMsgPage from "../pages/WriteMsgPage/WriteMsgPage.jsx";
 import FlowPage from "../pages/FlowPage/FlowPage.jsx";
+import UserMessagesPage from "../pages/UserMessagesPage/UserMessagesPage.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -31,5 +32,9 @@ export const router = createBrowserRouter([
   {
     path: "/flow",
     element: <FlowPage />,
+  },
+  {
+    path: "/user/:username",
+    element: <UserMessagesPage />,
   },
 ]);

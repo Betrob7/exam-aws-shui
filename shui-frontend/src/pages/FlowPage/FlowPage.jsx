@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useAuthStore } from "../../stores/useAuthStore";
 import { useAuthToken } from "../../hooks/useAuthToken";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { getMessages, deleteMessage, updateMessage } from "../../api/messages";
+import LogoutButton from "../../components/LogoutButton/LogoutButton";
+import Layout from "../../components/Layout/Layout";
 import "./FlowPage.css";
 
 const FlowPage = () => {
@@ -13,7 +15,6 @@ const FlowPage = () => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // state för editing
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState("");
 
@@ -22,7 +23,9 @@ const FlowPage = () => {
       try {
         const data = await getMessages(token);
         if (Array.isArray(data)) {
-          setMessages(data);
+          // sortera på datum, senaste först
+          const sorted = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+          setMessages(sorted);
         } else {
           console.error("Felaktigt svar från API:", data);
         }
@@ -69,11 +72,11 @@ const FlowPage = () => {
   if (loading) return <p>Laddar meddelanden...</p>;
 
   return (
-    <div className="flow-container">
+    <Layout>
       <div className="flow-header">
         <h2>Flow</h2>
         <p>
-          Inloggad som: <strong>{user?.username ? user.username : "Gäst"}</strong>
+          Inloggad som: <strong>{user?.username || "Gäst"}</strong>
         </p>
       </div>
 
@@ -88,8 +91,10 @@ const FlowPage = () => {
           ) : (
             <>
               <p>{msg.text}</p>
-              <small>{msg.createdAt}</small>
-              <strong>— {msg.username}</strong>
+              <small>{new Date(msg.createdAt).toLocaleString()}</small>
+              <strong>
+                — <Link to={`/user/${msg.username}`}>{msg.username}</Link>
+              </strong>
             </>
           )}
 
@@ -107,7 +112,14 @@ const FlowPage = () => {
           ✍️
         </button>
       </div>
-    </div>
+
+      {/* Logout-knapp längst ner */}
+      {user && (
+        <div className="logout-wrapper">
+          <LogoutButton />
+        </div>
+      )}
+    </Layout>
   );
 };
 

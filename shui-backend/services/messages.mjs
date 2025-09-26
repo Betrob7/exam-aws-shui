@@ -1,5 +1,5 @@
 import { client } from "./client.mjs";
-import { PutItemCommand, GetItemCommand, ScanCommand, DeleteItemCommand, UpdateItemCommand } from "@aws-sdk/client-dynamodb";
+import { PutItemCommand, GetItemCommand, ScanCommand, DeleteItemCommand, UpdateItemCommand, QueryCommand } from "@aws-sdk/client-dynamodb";
 import { marshall, unmarshall } from "@aws-sdk/util-dynamodb";
 
 const TABLE_NAME = "shui-table";
@@ -21,14 +21,21 @@ export const getAllMessages = async () => {
 };
 
 // 🔹 Lägg till nytt meddelande
+// 🔹 Lägg till nytt meddelande
 export const addMessage = async (message) => {
+  const createdAt = new Date().toISOString();
+
   const item = {
     PK: `MESSAGE#${message.id}`,
     SK: "PROFILE",
     id: message.id,
     username: message.username,
     text: message.text,
-    createdAt: new Date().toISOString(),
+    createdAt,
+
+    // 🔑 extra för GSI (så vi kan query:a på användare)
+    GSI1PK: `USER#${message.username}`,
+    GSI1SK: createdAt,
   };
 
   const command = new PutItemCommand({
@@ -86,4 +93,19 @@ export const updateMessage = async (id, newText) => {
 
   const result = await client.send(command);
   return unmarshall(result.Attributes);
+};
+
+// 🔹 Hämta alla meddelanden för en användare
+export const getMessagesByUser = async (username) => {
+  const command = new QueryCommand({
+    TableName: TABLE_NAME,
+    IndexName: "GSI1", // använder indexet från serverless.yml
+    KeyConditionExpression: "GSI1PK = :user",
+    ExpressionAttributeValues: {
+      ":user": { S: `USER#${username}` },
+    },
+  });
+
+  const result = await client.send(command);
+  return result.Items.map((item) => unmarshall(item));
 };

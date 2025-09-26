@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
+import Layout from "../../components/Layout/Layout";
 import "./HomePage.css";
 
 const HomePage = () => {
   return (
-    <div className="home-container">
+    <Layout>
       <h1>Shui</h1>
       <p>Välkommen till meddelandeflödet</p>
 
@@ -18,7 +19,7 @@ const HomePage = () => {
           ✍️ Registrera dig
         </Link>
       </div>
-    </div>
+    </Layout>
   );
 };
 

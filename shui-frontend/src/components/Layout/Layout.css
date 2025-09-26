@@ -1,0 +1,10 @@
+.page-container {
+  min-height: 100vh;
+  max-width: 480px;
+  width: 100%;
+  background: #162447; /* mörkblå */
+  color: white;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}

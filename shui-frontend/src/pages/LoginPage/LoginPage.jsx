@@ -4,6 +4,7 @@ import { loginApi } from "../../api/auth";
 import { useAuthToken } from "../../hooks/useAuthToken";
 import { useAuthStore } from "../../stores/useAuthStore";
 import { useNavigate, Link } from "react-router-dom";
+import Layout from "../../components/Layout/Layout";
 import "./LoginPage.css";
 
 const LoginPage = () => {
@@ -29,7 +30,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="auth-container">
+    <Layout>
       <h2>Logga in</h2>
       <form className="auth-form" onSubmit={handleLogin}>
         <input type="text" placeholder="Användarnamn" value={username} onChange={(e) => setUsername(e.target.value)} />
@@ -43,7 +44,7 @@ const LoginPage = () => {
       <p>
         Eller <Link to="/flow">fortsätt som gäst</Link>
       </p>
-    </div>
+    </Layout>
   );
 };
 

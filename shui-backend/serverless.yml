@@ -61,6 +61,13 @@ functions:
           path: /api/messages/{id}
           method: PATCH
 
+  GetMessagesByUser:
+    handler: functions/messages/getMessagesByUser.handler
+    events:
+      - httpApi:
+          path: /api/messages/user/{username}
+          method: GET
+
 resources:
   Resources:
     BonzaiTable:

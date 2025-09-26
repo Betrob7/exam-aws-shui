@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { registerApi } from "../../api/auth";
 import { Link, useNavigate } from "react-router-dom";
+import Layout from "../../components/Layout/Layout";
 import "./RegisterPage.css";
 
 const RegisterPage = () => {
@@ -26,7 +27,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="auth-container">
+    <Layout>
       <h2>Registrera</h2>
       <form className="auth-form" onSubmit={handleSubmit}>
         <input type="text" name="username" placeholder="Användarnamn" value={formData.username} onChange={handleChange} />
@@ -38,7 +39,7 @@ const RegisterPage = () => {
       <p>
         Har du redan konto? <Link to="/login">Logga in</Link>
       </p>
-    </div>
+    </Layout>
   );
 };
 
