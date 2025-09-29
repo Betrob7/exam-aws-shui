@@ -5,6 +5,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { getMessages, deleteMessage, updateMessage } from "../../api/messages";
 import LogoutButton from "../../components/LogoutButton/LogoutButton";
 import Layout from "../../components/Layout/Layout";
+import Loading from "../../components/Loading/Loading";
+import { motion } from "framer-motion";
 import "./FlowPage.css";
 
 const FlowPage = () => {
@@ -17,14 +19,16 @@ const FlowPage = () => {
 
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState("");
+  const [sortOrder, setSortOrder] = useState("desc");
 
   useEffect(() => {
     const fetchMessages = async () => {
       try {
         const data = await getMessages(token);
         if (Array.isArray(data)) {
-          // sortera på datum, senaste först
-          const sorted = data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+          const sorted = [...data].sort((a, b) =>
+            sortOrder === "desc" ? new Date(b.createdAt) - new Date(a.createdAt) : new Date(a.createdAt) - new Date(b.createdAt)
+          );
           setMessages(sorted);
         } else {
           console.error("Felaktigt svar från API:", data);
@@ -37,7 +41,7 @@ const FlowPage = () => {
     };
 
     fetchMessages();
-  }, [token]);
+  }, [token, sortOrder]);
 
   const handleDelete = async (id) => {
     const res = await deleteMessage(id, token);
@@ -69,43 +73,61 @@ const FlowPage = () => {
     }
   };
 
-  if (loading) return <p>Laddar meddelanden...</p>;
+  if (loading) return <Loading />;
 
   return (
     <Layout>
-      <div className="flow-header">
+      <motion.div className="flow-header" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
         <h2>Flow</h2>
-        <p>
-          Inloggad som: <strong>{user?.username || "Gäst"}</strong>
-        </p>
+        {user?.username && (
+          <p>
+            Inloggad som: <strong>{user.username}</strong>
+          </p>
+        )}
+        <button
+          className={`sort-btn ${sortOrder === "asc" ? "asc" : ""}`}
+          onClick={() => setSortOrder(sortOrder === "desc" ? "asc" : "desc")}
+        >
+          Sortera {sortOrder === "desc" ? "↓" : "↑"}
+        </button>
+      </motion.div>
+
+      <div className="messages-list">
+        {messages.map((msg, i) => (
+          <motion.div
+            key={msg.id}
+            className="message-card"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: i * 0.05 }}
+          >
+            {editingId === msg.id ? (
+              <>
+                <input type="text" value={editText} onChange={(e) => setEditText(e.target.value)} />
+                <button onClick={() => handleEditSave(msg.id)}>💾 Spara</button>
+                <button onClick={handleEditCancel}>❌ Avbryt</button>
+              </>
+            ) : (
+              <>
+                <p className="message-text">{msg.text}</p>
+                <div className="message-footer">
+                  <small>{new Date(msg.createdAt).toLocaleString()}</small>
+                  <strong>
+                    — <Link to={`/user/${msg.username}`}>{msg.username}</Link>
+                  </strong>
+                </div>
+              </>
+            )}
+
+            {user?.username === msg.username && editingId !== msg.id && (
+              <div className="actions">
+                <button onClick={() => handleEditStart(msg)}>✏️ Edit</button>
+                <button onClick={() => handleDelete(msg.id)}>🗑️ Delete</button>
+              </div>
+            )}
+          </motion.div>
+        ))}
       </div>
-
-      {messages.map((msg) => (
-        <div key={msg.id} className="message-card">
-          {editingId === msg.id ? (
-            <>
-              <input type="text" value={editText} onChange={(e) => setEditText(e.target.value)} />
-              <button onClick={() => handleEditSave(msg.id)}>💾 Spara</button>
-              <button onClick={handleEditCancel}>❌ Avbryt</button>
-            </>
-          ) : (
-            <>
-              <p>{msg.text}</p>
-              <small>{new Date(msg.createdAt).toLocaleString()}</small>
-              <strong>
-                — <Link to={`/user/${msg.username}`}>{msg.username}</Link>
-              </strong>
-            </>
-          )}
-
-          {user?.username === msg.username && editingId !== msg.id && (
-            <div className="actions">
-              <button onClick={() => handleEditStart(msg)}>✏️ Edit</button>
-              <button onClick={() => handleDelete(msg.id)}>🗑️ Delete</button>
-            </div>
-          )}
-        </div>
-      ))}
 
       <div className="write-btn-container">
         <button className="write-btn" onClick={() => navigate("/writemsg")}>
@@ -113,7 +135,6 @@ const FlowPage = () => {
         </button>
       </div>
 
-      {/* Logout-knapp längst ner */}
       {user && (
         <div className="logout-wrapper">
           <LogoutButton />

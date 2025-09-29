@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
+import Loading from "../../components/Loading/Loading";
 import "./UserMessagesPage.css";
 
 const BASE_URL = "https://oatdlmvgcb.execute-api.eu-north-1.amazonaws.com/api/messages";
@@ -27,7 +28,7 @@ const UserMessagesPage = () => {
     fetchMessages();
   }, [username]);
 
-  if (loading) return <p>Laddar...</p>;
+  if (loading) return <Loading />;
 
   return (
     <Layout>

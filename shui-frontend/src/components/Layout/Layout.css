@@ -1,10 +1,19 @@
-.page-container {
-  min-height: 100vh;
-  max-width: 480px;
+.layout-wrapper {
   width: 100%;
-  background: #162447; /* mörkblå */
+  max-width: 480px;       /* mobilbredd på desktop */
+  min-height: 100vh;
+  background: #162447;
   color: white;
-  padding: 2rem;
+
+  /* luft runtom */
+  padding: 1rem;
+
+  /* centrera på sidan */
+  margin: 2rem auto;
+
   display: flex;
   flex-direction: column;
+
+  gap: 1rem;              /* jämn spacing mellan element */
+  border-radius: 8px;     /* mjuka hörn så det inte ser "kantigt" ut */
 }

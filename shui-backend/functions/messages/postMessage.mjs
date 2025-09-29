@@ -11,7 +11,7 @@ export const handler = middy(async (event) => {
 
   const message = {
     id: uuidv4(),
-    username: event.user.username,
+    username: event.user?.username || body.username || "Gäst",
     text: body.text,
   };
 
@@ -20,5 +20,4 @@ export const handler = middy(async (event) => {
   return sendResponse(201, saved);
 })
   .use(httpJsonBodyParser())
-  .use(authMiddleware())
   .use(errorHandler());

@@ -1,33 +1,55 @@
+/* UserMessagesPage.css */
+
 .user-messages-container {
-  
-  
-  margin: 2rem auto;
-  background: #f5f5f5;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
 }
 
 .user-messages-container h2 {
   text-align: center;
-  margin-bottom: 1.5rem;
-  color: #162447;
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  color: #f9fafb; /* vit text för mörk bakgrund */
+}
+
+.user-messages-container a {
+  display: inline-block;
+  margin: 0 auto 1rem auto;
+  color: #e43f5a;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.user-messages-container a:hover {
+  color: #ff6f7d;
 }
 
 .user-message-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
- 
-  margin-bottom: 1rem;
   background: #fff;
+  color: #111;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.user-message-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .user-message-card p {
-    color: black;
   margin: 0 0 0.5rem;
+  font-size: 1rem;
 }
 
 .user-message-card small {
-  color: #666;
+  display: block;
   font-size: 0.85rem;
+  color: #666;
+  text-align: right;
 }
+

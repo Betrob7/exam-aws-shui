@@ -2,7 +2,7 @@
 import "./Layout.css";
 
 const Layout = ({ children }) => {
-  return <div className="page-container">{children}</div>;
+  return <div className="layout-wrapper">{children}</div>;
 };
 
 export default Layout;

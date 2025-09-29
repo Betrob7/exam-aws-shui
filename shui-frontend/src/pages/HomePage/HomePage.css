@@ -1,38 +1,36 @@
-.home-container {
+.homepage-container {
   text-align: center;
-  padding: 3rem 1rem;
+  margin-top: 4rem;
+  color: white;
 }
 
-.home-container h1 {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
-}
-
-.home-container p {
-  margin-bottom: 2rem;
-  font-size: 1.2rem;
-  color: #555;
-}
-
-.home-links {
+.homepage-actions {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  max-width: 300px;
-  margin: 0 auto;
+  margin-top: 2rem;
 }
 
-.home-btn {
-  display: block;
-  padding: 1rem;
-  border-radius: 8px;
-  background: #0070f3;
+.btn {
+  padding: 0.8rem 1.2rem;
+  background: #e43f5a;
   color: white;
+  border-radius: 6px;
   text-decoration: none;
   font-weight: bold;
-  transition: background 0.2s;
+  transition: background 0.2s ease-in-out;
 }
 
-.home-btn:hover {
-  background: #005bb5;
+.btn:hover {
+  background: #c72d47;
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
 }

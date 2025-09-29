@@ -4,13 +4,11 @@ const BASE_URL = "https://oatdlmvgcb.execute-api.eu-north-1.amazonaws.com/api/me
 
 export const getMessages = async (token) => {
   try {
-    const response = await axios.get(BASE_URL, {
-      headers: {
-        Authorization: token,
-        "Content-Type": "application/json",
-      },
-    });
-    return response.data; // lista med meddelanden
+    const headers = { "Content-Type": "application/json" };
+    if (token) headers["Authorization"] = token;
+
+    const response = await axios.get(BASE_URL, { headers });
+    return response.data;
   } catch (error) {
     return error.response?.data?.message || error.message;
   }
@@ -18,12 +16,15 @@ export const getMessages = async (token) => {
 
 export const postMessage = async (data, token) => {
   try {
-    const response = await axios.post(BASE_URL, data, {
-      headers: {
-        Authorization: token,
-        "Content-Type": "application/json",
-      },
-    });
+    const headers = {
+      "Content-Type": "application/json",
+    };
+
+    if (token) {
+      headers["Authorization"] = token; // lägg bara till om inloggad
+    }
+
+    const response = await axios.post(BASE_URL, data, { headers });
     return response.data; // det skapade meddelandet
   } catch (error) {
     return error.response?.data?.message || error.message;
