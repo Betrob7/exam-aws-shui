@@ -2,7 +2,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "../pages/HomePage/HomePage.jsx";
 import LoginPage from "../pages/LoginPage/LoginPage.jsx";
 import RegisterPage from "../pages/RegisterPage/RegisterPage.jsx";
-import RemovedPage from "../pages/RemovedPage/RemovedPage.jsx";
 import WriteMsgPage from "../pages/WriteMsgPage/WriteMsgPage.jsx";
 import FlowPage from "../pages/FlowPage/FlowPage.jsx";
 import UserMessagesPage from "../pages/UserMessagesPage/UserMessagesPage.jsx";
@@ -21,10 +20,7 @@ export const router = createBrowserRouter([
     path: "/register",
     element: <RegisterPage />,
   },
-  {
-    path: "/removed",
-    element: <RemovedPage />,
-  },
+
   {
     path: "/writemsg",
     element: <WriteMsgPage />,

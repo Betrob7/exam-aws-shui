@@ -39,7 +39,7 @@ const LoginPage = () => {
         {error && <p className="error">{error}</p>}
       </form>
       <p>
-        Har du inget konto? <Link to="/register">Registrera dig</Link>
+        Har du inget konto? <Link to="/register">Registrera dig!</Link>
       </p>
       <p>
         Eller <Link to="/flow">fortsätt som gäst</Link>

@@ -28,14 +28,14 @@ const RegisterPage = () => {
 
   return (
     <Layout>
-      <h2>Registrera</h2>
+      <h2>Registrera dig</h2>
       <form className="auth-form" onSubmit={handleSubmit}>
         <input type="text" name="username" placeholder="Användarnamn" value={formData.username} onChange={handleChange} />
         <input type="email" name="email" placeholder="E-post" value={formData.email} onChange={handleChange} />
         <input type="password" name="password" placeholder="Lösenord" value={formData.password} onChange={handleChange} />
         <button type="submit">Registrera</button>
       </form>
-      {message && <p>{message}</p>}
+      {message && <p className="error">{message}</p>}
       <p>
         Har du redan konto? <Link to="/login">Logga in</Link>
       </p>

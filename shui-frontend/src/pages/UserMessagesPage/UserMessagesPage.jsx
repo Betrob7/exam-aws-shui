@@ -4,6 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
 import Loading from "../../components/Loading/Loading";
+import BackButton from "../../components/BackButton/BackButton";
 import "./UserMessagesPage.css";
 
 const BASE_URL = "https://oatdlmvgcb.execute-api.eu-north-1.amazonaws.com/api/messages";
@@ -33,8 +34,8 @@ const UserMessagesPage = () => {
   return (
     <Layout>
       <div className="user-messages-container">
-        <h2>Meddelanden från {username}</h2>
-        <Link to="/flow">⬅️ Tillbaka till flödet</Link>
+        <BackButton />
+        <h2>{username}:s meddelandehistorik</h2>
         {messages.length === 0 ? (
           <p>Inga meddelanden ännu.</p>
         ) : (

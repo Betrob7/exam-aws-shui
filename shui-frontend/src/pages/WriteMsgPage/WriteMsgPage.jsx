@@ -4,6 +4,7 @@ import { useAuthStore } from "../../stores/useAuthStore";
 import { useAuthToken } from "../../hooks/useAuthToken";
 import { useNavigate } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
+import BackButton from "../../components/BackButton/BackButton";
 import "./WriteMsgPage.css";
 
 const WriteMsgPage = () => {
@@ -28,16 +29,10 @@ const WriteMsgPage = () => {
   return (
     <Layout>
       <div className="write-container">
-        <button
-          className="back-btn"
-          type="button"
-          onClick={() => navigate(-1)} // eller navigate("/flow")
-        >
-          <span className="back-icon">⮌</span>
-        </button>
-        <h2>Skriv ett nytt meddelande</h2>
+        <BackButton />
+        <h2>Nytt inlägg</h2>
         <form onSubmit={handleSubmit}>
-          <textarea value={text} onChange={(e) => setText(e.target.value)} placeholder="Skriv något..." />
+          <textarea value={text} onChange={(e) => setText(e.target.value)} />
           <button type="submit">Posta</button>
         </form>
       </div>

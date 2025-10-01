@@ -7,6 +7,7 @@
 }
 
 .auth-form input {
+  font-size: 16px;
   padding: 0.75rem;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -15,17 +16,22 @@
 .auth-form button {
   padding: 0.75rem;
   border: none;
-  background: #0070f3;
+  background: var(--color-text);
   color: white;
   border-radius: 8px;
   cursor: pointer;
 }
 
-.auth-form button:hover {
-  background: #005bb5;
+p a {
+  color: var(--color-muted);
+  text-decoration: none;
+  font-weight: bold;
 }
 
+
 .error {
-  color: red;
-  margin-top: 0.5rem;
+  color: var(--color-muted) !important; 
+  background: transparent;
+  font-weight: bold;
+
 }

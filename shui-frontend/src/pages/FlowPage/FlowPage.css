@@ -9,17 +9,13 @@
 .sort-btn {
   margin-top: 0.8rem;
   padding: 0.6rem 1rem;
-  background: #e43f5a;
-  color: white;
+  background: var(--color-text);
+  color: var(--color-bg);
   border: none;
-  border-radius: 20px; /* rundare filterstil */
+  border-radius: 20px;
   font-weight: bold;
   cursor: pointer;
   transition: background 0.2s ease-in-out;
-}
-
-.sort-btn:hover {
-  background: #c72d47;
 }
 
 .messages-list {
@@ -29,7 +25,7 @@
 }
 
 .message-card {
-  background: #ffffff;
+  background: var(--color-text);
   color: #0a192f;
   padding: 1rem;
   border-radius: 12px;
@@ -42,9 +38,7 @@
   transition: transform 0.2s ease-in-out;
 }
 
-.message-card:hover {
-  transform: translateY(-3px);
-}
+
 
 .message-text {
   flex: 1;
@@ -58,6 +52,28 @@
   font-size: 0.8rem;
   color: #555;
 }
+
+.message-footer a {
+  color: inherit;            /* tar samma färg som .message-footer */
+  text-decoration: none;     /* tar bort understrykning */
+  font-weight: 600;          /* lite fetare så det syns */
+  transition: color 0.2s ease-in-out;
+}
+
+.message-footer a:hover {
+  color: #37aeab;            /* accentfärg vid hover */
+  text-decoration: underline; /* kan aktivera vid hover för snygg effekt */
+}
+
+.edit-btn {
+  background-color: #162447;
+  color: var(--color-muted);
+  padding: .25rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
 
 .actions {
   margin-top: 0.5rem;
@@ -75,18 +91,18 @@
   font-size: 0.8rem;
 }
 
-.actions button:hover {
-  background: #1f345c;
-}
+
 
 .write-btn-container {
-  position: fixed;
-  bottom: 80px;
+  position: sticky;
+  bottom: 40px;
   right: 20px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .write-btn {
-  background: #37aeab;
+  background: #162447;
   color: white;
   border: none;
   border-radius: 50%;
@@ -97,6 +113,14 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.write-btn:hover {
-  background: #2a8d8a;
+.logout-wrapper {
+  display: flex;
+  justify-content: center;
 }
+
+
+
+
+
+
+

@@ -5,21 +5,34 @@
   padding: 0;
 }
 
+:root {
+  --color-bg: #D84040;
+  --color-card: #A31D1D;
+  
+  --color-text: #ECDCBF;
+  --color-muted: #F8F2DE;
+
+  --font-primary: "Fira Sans", sans-serif;
+  --font-display: "Sansita One", cursive;
+
+  --radius: 8px;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
 html, body, #root {
   height: 100%;
   width: 100%;
+  
+  overflow-x: auto;   /* tillåter scroll istället för att krympa */
 }
 
 body {
   margin: 0;
-  background: #162447; /* bakgrund utanför appen */
+  background: var(--color-bg); /* bakgrund utanför appen */
+  
   display: flex;
   justify-content: center;
 }
 
-#root {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
+
 

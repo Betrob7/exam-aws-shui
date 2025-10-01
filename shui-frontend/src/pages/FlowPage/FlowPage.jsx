@@ -77,8 +77,8 @@ const FlowPage = () => {
 
   return (
     <Layout>
-      <motion.div className="flow-header" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-        <h2>Flow</h2>
+      <motion.div className="flow-header" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+        <h2>Anslagstavlan</h2>
         {user?.username && (
           <p>
             Inloggad som: <strong>{user.username}</strong>
@@ -92,20 +92,23 @@ const FlowPage = () => {
         </button>
       </motion.div>
 
-      <div className="messages-list">
-        {messages.map((msg, i) => (
-          <motion.div
-            key={msg.id}
-            className="message-card"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: i * 0.05 }}
-          >
+      <motion.div
+        className="messages-list"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6, delay: 0.2 }} // liten fördröjning så headern hinner in först
+      >
+        {messages.map((msg) => (
+          <div key={msg.id} className="message-card">
             {editingId === msg.id ? (
               <>
                 <input type="text" value={editText} onChange={(e) => setEditText(e.target.value)} />
-                <button onClick={() => handleEditSave(msg.id)}>💾 Spara</button>
-                <button onClick={handleEditCancel}>❌ Avbryt</button>
+                <button className="edit-btn" onClick={() => handleEditSave(msg.id)}>
+                  Spara
+                </button>
+                <button className="edit-btn" onClick={handleEditCancel}>
+                  Avbryt
+                </button>
               </>
             ) : (
               <>
@@ -121,13 +124,13 @@ const FlowPage = () => {
 
             {user?.username === msg.username && editingId !== msg.id && (
               <div className="actions">
-                <button onClick={() => handleEditStart(msg)}>✏️ Edit</button>
-                <button onClick={() => handleDelete(msg.id)}>🗑️ Delete</button>
+                <button onClick={() => handleEditStart(msg)}>Edit</button>
+                <button onClick={() => handleDelete(msg.id)}>Delete</button>
               </div>
             )}
-          </motion.div>
+          </div>
         ))}
-      </div>
+      </motion.div>
 
       <div className="write-btn-container">
         <button className="write-btn" onClick={() => navigate("/writemsg")}>
