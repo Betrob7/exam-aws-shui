@@ -9,8 +9,8 @@ import "./WriteMsgPage.css";
 
 const WriteMsgPage = () => {
   const [text, setText] = useState("");
-  const { user } = useAuthStore(); // hämtar username
-  const { token } = useAuthToken(); // hämtar JWT
+  const { user } = useAuthStore();
+  const { token } = useAuthToken();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -20,7 +20,7 @@ const WriteMsgPage = () => {
     const response = await postMessage({ text, username: user?.username || "Gäst" }, token);
 
     if (response.id) {
-      navigate("/flow"); // till flödet efter post
+      navigate("/flow");
     } else {
       console.error("Misslyckades att skapa meddelande:", response);
     }

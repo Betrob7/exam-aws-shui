@@ -1,4 +1,21 @@
-/* Reset / base */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Mulish:wght@400;600&display=swap');
+
+:root {
+  --font-title: 'Nunito', sans-serif;
+  --font-body: 'Mulish', sans-serif;
+}
+
+h1, h2, button {
+  font-family: var(--font-title);
+}
+
+p, input {
+  font-family: var(--font-body);
+}
+
+
+
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -12,11 +29,10 @@
   --color-text: #ECDCBF;
   --color-muted: #F8F2DE;
 
-  --font-primary: "Fira Sans", sans-serif;
-  --font-display: "Sansita One", cursive;
+ 
 
-  --radius: 8px;
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+ 
+  
 }
 
 html, body, #root {

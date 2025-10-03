@@ -7,6 +7,8 @@ import LogoutButton from "../../components/LogoutButton/LogoutButton";
 import Layout from "../../components/Layout/Layout";
 import Loading from "../../components/Loading/Loading";
 import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 import "./FlowPage.css";
 
 const FlowPage = () => {
@@ -92,12 +94,7 @@ const FlowPage = () => {
         </button>
       </motion.div>
 
-      <motion.div
-        className="messages-list"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.2 }} // liten fördröjning så headern hinner in först
-      >
+      <motion.div className="messages-list" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6, delay: 0.2 }}>
         {messages.map((msg) => (
           <div key={msg.id} className="message-card">
             {editingId === msg.id ? (
@@ -134,7 +131,7 @@ const FlowPage = () => {
 
       <div className="write-btn-container">
         <button className="write-btn" onClick={() => navigate("/writemsg")}>
-          ✍️
+          <FontAwesomeIcon icon={faPen} />
         </button>
       </div>
 

@@ -26,7 +26,7 @@
 
 .message-card {
   background: var(--color-text);
-  color: #0a192f;
+  color: #162447;
   padding: 1rem;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -50,11 +50,11 @@
   display: flex;
   justify-content: space-between;
   font-size: 0.8rem;
-  color: #555;
+  color: #162447;
 }
 
 .message-footer a {
-  color: inherit;            /* tar samma färg som .message-footer */
+  color: #162447;            /* tar samma färg som .message-footer */
   text-decoration: none;     /* tar bort understrykning */
   font-weight: 600;          /* lite fetare så det syns */
   transition: color 0.2s ease-in-out;
@@ -103,7 +103,7 @@
 
 .write-btn {
   background: #162447;
-  color: white;
+  color: var(--color-text);
   border: none;
   border-radius: 50%;
   width: 60px;
